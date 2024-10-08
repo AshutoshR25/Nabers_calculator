@@ -36,6 +36,7 @@ def main():
     exit()
     # df.columns = df.columns.droplevel()
 
+    # newlist = [i for i in alist if i > area]
 
 
     a1 = next((i for i in alist if i > area), None)
