@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import pandas as pd
+import numpy as np
 from functions import NabersPredictor
 
 
@@ -10,7 +11,7 @@ def main():
     hlist = [40, 50, 60]
 
     area = 4600
-    hours = 45
+    hours = 48
     elec = 450000
 
     df1 = pd.read_excel('data/Nabers_3_Star.xlsx', sheet_name='Sheet1')
@@ -23,59 +24,33 @@ def main():
 
     # print(df)
 
+    # get normalised electricity allowance
     df1 = df.loc[idx[1000, :], :]
     df1 = df1 / 1000
-    # df1 = df1.divide(hlist, axis=1)
+    df1.index = df1.index.droplevel()
 
-    print(df1)
-
-    x = elec / area
-    print(x)
-    # df2 = df.loc[idx[2000, :], :]
-
-    exit()
-    # df.columns = df.columns.droplevel()
-
-    # newlist = [i for i in alist if i > area]
-
-
-    a1 = next((i for i in alist if i > area), None)
-    i = alist.index(a1)
-    a0 = alist[i - 1]
-
+    # get the hours fraction
     h1 = next((i for i in hlist if i > hours), None)
     i = hlist.index(h1)
     h0 = hlist[i - 1]
+    f = ((hours - h0) / (h1 - h0))
 
-    print('--------------')
-    print(df)
-    # filter by area / hours
-    df1 = df.loc[idx[a0, h0:h1], :]
-    df2 = df.loc[idx[a1, h0:h1], :]
-
-    # filter by hours
-    # df1 = df1.loc[idx[a0, :], :]
-    # df2 = df2.loc[idx[a1, :], :]
-
-
-
-    print('--------------')
+    # find the benchmark values for each star rating
+    dfa = df1.loc[h0]
+    dfb = df1.loc[h1]
     print(df1)
-    print('--------------')
-    print(df2)
+    print(dfa)
+    dfc = dfa + (dfb - dfa) * f
+    dfc.index = dfc.index.droplevel()
+    dfc = dfc[::-1]
 
-    # print('--------------')
-    # print('--------------')
-    # print(df1 - elec)
-    # print('--------------')
-    # print(df2 - elec)
+    # get normalised elec actual
+    x = elec / area
 
-    # f = ((area - a0) / (a1 - a0))
-    # print(f)
-    # dfx = df1 + df2 * f
-    # print(dfx)
-
-    # df = df[df['area'] < a]
+    print(dfc)
+    print(x)
+    stars = np.interp(x, dfc.values, dfc.index, period=-1)
+    print('the answer is', stars)
 
 
 # def main():
