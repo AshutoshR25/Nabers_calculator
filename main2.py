@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import pandas as pd
-import numpy as np
-from functions import NabersPredictor
 
 
 def main():
@@ -10,9 +8,9 @@ def main():
     alist = [1000, 2000, 3000, 4000, 5000]
     hlist = [40, 50, 60]
 
-    area = 5900
-    hours = 38
-    elec = 481748
+    area = 4200
+    hours = 48
+    elec = 274748
 
     df1 = pd.read_excel('data/Nabers_3_Star.xlsx', sheet_name='Sheet1')
     df2 = pd.read_excel('data/Nabers_4_Star.xlsx', sheet_name='Sheet1')
@@ -64,6 +62,7 @@ def main():
     closest_smaller_row = smaller_values.iloc[-1] if not smaller_values.empty else None
     closest_larger_row = larger_values.iloc[0] if not larger_values.empty else None
 
+    # Will remove this if condition once we have 1 star 2 star and 6 star data.
     if closest_smaller_row is not None:
         closest_smaller_value = closest_smaller_row['elec']
         smaller_star_rating = closest_smaller_row.name 
