@@ -1,0 +1,40 @@
+{
+    "scope2_emissions": [
+        {
+            "state": "NSW",
+            "2020": 0.81 
+        },
+        {
+            "state": "Victoria",
+            "2020": 0.98
+        },
+        {
+            "state": "Tasmania",
+            "2020": 0.17
+        }
+    ],
+    "scope3_emissions": [
+        {
+            "state": "NSW",
+            "2020": 0.09
+        },
+        {
+            "state": "Victoria",
+            "2020": 0.11
+        },
+        {
+            "state": "Tasmania",
+            "2020": 0.02
+        }
+    ],
+    "scope1_gas": [
+        {
+            "value": 0.05153
+        }
+    ],
+    "scope1_diesel": [
+        {
+            "value": 0.0702
+        }
+    ]
+}
