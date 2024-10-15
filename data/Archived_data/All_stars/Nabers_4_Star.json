@@ -1,0 +1,94 @@
+{
+"Sheet1":[
+ {
+  "Floor (m2)": 1000,
+  "Hours": 40,
+  "emissions": 79915.1,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 1000,
+  "Hours": 50,
+  "emissions": 93871.3,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 1000,
+  "Hours": 60,
+  "emissions": 107827.5,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 2000,
+  "Hours": 40,
+  "emissions": 159830.2,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 2000,
+  "Hours": 50,
+  "emissions": 187742.6,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 2000,
+  "Hours": 60,
+  "emissions": 215654.9,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 3000,
+  "Hours": 40,
+  "emissions": 239745.3,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 3000,
+  "Hours": 50,
+  "emissions": 281613.9,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 3000,
+  "Hours": 60,
+  "emissions": 323482.4,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 4000,
+  "Hours": 40,
+  "emissions": 319660.4,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 4000,
+  "Hours": 50,
+  "emissions": 375485.2,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 4000,
+  "Hours": 60,
+  "emissions": 431309.9,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 5000,
+  "Hours": 40,
+  "emissions": 399575.5,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 5000,
+  "Hours": 50,
+  "emissions": 469356.4,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 5000,
+  "Hours": 60,
+  "emissions": 539137.4,
+  "Star Rating": 4
+ }
+]
+}

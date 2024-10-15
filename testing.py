@@ -1,26 +1,19 @@
 #!/usr/bin/env python3
 import pandas as pd
 import json
+import math
 
 def main():
 
     idx = pd.IndexSlice
     #alist = [1000, 2000, 3000, 4000, 5000]
     hlist = [40, 50, 60]
-
-    #df_scope2 = pd.read_excel('data/Scopes.xlsx', sheet_name='scope2_emissions')
-    #df_scope3 = pd.read_excel('data/Scopes.xlsx', sheet_name='scope3_emissions')
     
     with open('data/Scopes.json', 'r') as file:
         data = json.load(file)
 
-    # Load the JSON data
     with open('data/Nabers_stars.json', 'r') as f:
         data_stars = json.load(f)
-
-    # Create separate dataframes for Victoria and NSW
-    df_victoria = pd.DataFrame(data_stars['Victoria'])
-    print(df_victoria)
     
     df_scope2 = pd.DataFrame(data['scope2_emissions'])
     df_scope3 = pd.DataFrame(data['scope3_emissions'])
@@ -28,9 +21,6 @@ def main():
     # Set 'state' as the index
     df_scope2.set_index('state', inplace=True)
     df_scope3.set_index('state', inplace=True)
-
-    print(df_scope2)
-    print(df_scope3)
 
     # Get user input
     area = int(input("Enter the area: "))
@@ -56,10 +46,7 @@ def main():
 
     emissions = (elec*(scope2_elec+scope3_elec)) + (gas*scope1_gas) + (diesel*scope1_diesel)
 
-    df1 = pd.read_excel('data/Nabers_3_Star.xlsx', sheet_name='Sheet1')
-    df2 = pd.read_excel('data/Nabers_4_Star.xlsx', sheet_name='Sheet1')
-    df3 = pd.read_excel('data/Nabers_5_Star.xlsx', sheet_name='Sheet1')
-    df = pd.concat([df1, df2, df3])
+    df = pd.DataFrame(data_stars[state])
     df.columns = ['area', 'hours', 'emissions', 'stars']
     df.set_index(['stars', 'area', 'hours'], inplace=True)
     df = df.unstack(['stars'])
@@ -68,7 +55,6 @@ def main():
     # get normalised emissionstricity allowance
     df1 = df.loc[idx[1000, :], :]
     df1 = df1 / 1000
-    print(df1)
 
     #print(df1)
     df1.index = df1.index.droplevel()
@@ -76,11 +62,9 @@ def main():
     # get the hours fraction
     h1 = next((i for i in hlist if i > hours), None)
     i = hlist.index(h1)
-    print(h1)
     h0 = hlist[i - 1]
-    print(h0)
     f = ((hours - h0) / (h1 - h0))
-    print(f)
+
 
     # find the benchmark values for each star rating
     dfa = df1.loc[h0]
@@ -88,7 +72,6 @@ def main():
     dfc = dfa + (dfb - dfa) * f
     dfc.index = dfc.index.droplevel()
     dfc = dfc[::-1]
-    print(dfc)
 
     dfc = pd.DataFrame(list(dfc.items()), columns=['stars', 'emissions']).set_index('stars')
     dfc['emissions'] = dfc['emissions'].round(2)
@@ -103,20 +86,11 @@ def main():
     closest_smaller_row = smaller_values.iloc[-1] if not smaller_values.empty else None
     closest_larger_row = larger_values.iloc[0] if not larger_values.empty else None
 
-    # Will remove this if condition once we have 1 star 2 star and 6 star data.
-    if closest_smaller_row is not None:
-        closest_smaller_value = closest_smaller_row['emissions']
-        smaller_star_rating = closest_smaller_row.name 
-    else:
-        closest_smaller_value = None
-        smaller_star_rating = None
 
-    if closest_larger_row is not None:
-        closest_larger_value = closest_larger_row['emissions']
-        larger_star_rating = closest_larger_row.name  
-    else:
-        closest_larger_value = None
-        larger_star_rating = None
+    closest_smaller_value = closest_smaller_row['emissions']
+    smaller_star_rating = closest_smaller_row.name
+    closest_larger_value = closest_larger_row['emissions']
+    larger_star_rating = closest_larger_row.name
 
     if closest_smaller_value is not None and closest_larger_value is not None:
         x1, y1 = closest_smaller_value, smaller_star_rating
@@ -133,7 +107,23 @@ def main():
 
         print(f"Closest smaller value: {closest_smaller_value} with star rating {smaller_star_rating}")
         print(f"Closest larger value: {closest_larger_value} with star rating {larger_star_rating}")
-        print(f"The interpolated star rating for emissions {emissions} is: {interpolated_star_rating}")
+
+        integer_part = math.floor(interpolated_star_rating)
+        print(integer_part)
+        decimal_part = interpolated_star_rating - integer_part
+        decimal_part = round(decimal_part, 3)
+        print(decimal_part)
+
+        if decimal_part >= 0.501 and decimal_part <= 0.999:
+            stars = integer_part + 0.5
+        elif decimal_part >= 0.001 and decimal_part <= 0.499:
+            stars = integer_part
+        else:
+            stars = integer_part + 1
+
+        print(f"The interpolated star rating for your office building is: {stars}")
+
+        #print(f"The interpolated star rating for emissions {emissions} is: {interpolated_star_rating}")
     else:
         print("Could not find suitable values for interpolation.")
 

@@ -1,0 +1,94 @@
+{
+"Sheet1":[
+ {
+  "Floor (m2)": 1000,
+  "Hours": 40,
+  "Target Max Electricity kWh per anum": 73316,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 1000,
+  "Hours": 50,
+  "Target Max Electricity kWh per anum": 86120,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 1000,
+  "Hours": 60,
+  "Target Max Electricity kWh per anum": 98924,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 2000,
+  "Hours": 40,
+  "Target Max Electricity kWh per anum": 146633,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 2000,
+  "Hours": 50,
+  "Target Max Electricity kWh per anum": 172240,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 2000,
+  "Hours": 60,
+  "Target Max Electricity kWh per anum": 197848,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 3000,
+  "Hours": 40,
+  "Target Max Electricity kWh per anum": 219949,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 3000,
+  "Hours": 50,
+  "Target Max Electricity kWh per anum": 258361,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 3000,
+  "Hours": 60,
+  "Target Max Electricity kWh per anum": 296772,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 4000,
+  "Hours": 40,
+  "Target Max Electricity kWh per anum": 293266,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 4000,
+  "Hours": 50,
+  "Target Max Electricity kWh per anum": 344481,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 4000,
+  "Hours": 60,
+  "Target Max Electricity kWh per anum": 395697,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 5000,
+  "Hours": 40,
+  "Target Max Electricity kWh per anum": 366583,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 5000,
+  "Hours": 50,
+  "Target Max Electricity kWh per anum": 430602,
+  "Star Rating": 4
+ },
+ {
+  "Floor (m2)": 5000,
+  "Hours": 60,
+  "Target Max Electricity kWh per anum": 494621,
+  "Star Rating": 4
+ }
+]
+}
