@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+from pathlib import Path
 import colorlog
 import json
 import logging
 import numpy as np
+import os
 import pandas as pd
 import sys
 
@@ -13,12 +15,15 @@ def main():
 
     # o = StarCalculator(ratedArea=100, ratedHours=50, elec=200000, year='2023')
     # o = StarCalculator(ratedArea=10000, ratedHours=50, elec=200000, year='2023')
-    o = StarCalculator(ratedArea=2708, ratedHours=50, elec=210000, year='2024')
+    # o = StarCalculator(ratedArea=2708, ratedHours=50, elec=210000, year='2024')
+    o = StarCalculator(ratedArea=5084.3, ratedHours=50, elec=377021, year='2024')
 
 
 class StarCalculator():
 
     def __init__(self, **kwargs):
+        self.stars = None
+        self.starsClip = None
         self.set_params(**kwargs)
         self.set_energy(**kwargs)
         self.check_year()
@@ -31,13 +36,13 @@ class StarCalculator():
         self.show_settings()
         self.show_results()
 
-    def set_params(self, year="2020", state='Victoria', ratedArea=2000, ratedHours=50, **kwargs):
+    def set_params(self, year='2024', state='Victoria', ratedArea=2000, ratedHours=50, **kwargs):
         self.year = year
         self.state = state
         self.ratedArea = ratedArea
         self.ratedHours = ratedHours
 
-    def set_energy(self, elec=100000, gas=0, diesel=0, **kwargs):
+    def set_energy(self, elec=0, gas=0, diesel=0, **kwargs):
         self.elec = elec
         self.gas = gas
         self.diesel = diesel
@@ -57,12 +62,14 @@ class StarCalculator():
         log.info('factor_diesel_scope1 {:}'.format(self.factor_diesel_scope1))
 
     def show_results(self):
+        log.info('star limits')
+        for s, e in self.limits.items():
+            log.info('   {:4} {:8.0f}'.format(s, e))
         log.info('energy intensity {:.1f} MJ/m2'.format(self.energyIntensity))
         log.info('total emissions {:.0f} kgCO2-e'.format(self.emissions))
-        log.info('stars {:.2f}'.format(self.stars))
-        log.info('stars clipped {:.1f}'.format(self.starsClip))
-        for s, e in self.limits.items():
-            log.info('stars limit {:4} {:8.0f}'.format(s, e))
+        if self.stars:
+            log.info('stars {:.2f}'.format(self.stars))
+            log.info('stars clipped {:.1f}'.format(self.starsClip))
 
     def check_year(self):
         self.yearNGA = self.year
@@ -73,7 +80,10 @@ class StarCalculator():
             self.yearNGA = '2025'
 
     def get_emission_factors(self):
-        with open('data/emission_factors.json', 'r') as file:
+        appdir = Path(__file__).parents[1]
+        appdir = Path(__file__).parent
+        fname = os.path.join(appdir, 'data', 'nabers_emission_factors.json')
+        with open(fname, 'r') as file:
             data = json.load(file)
         self.factor_elec_scope2 = data['elec_scope2'][self.yearNGA][self.state]
         self.factor_elec_scope3 = data['elec_scope3'][self.yearNGA][self.state]
@@ -83,7 +93,11 @@ class StarCalculator():
     def get_emission_allowance(self):
 
         # emissions per m2 is a constant for each star rating and rated hours
-        with open('data/star_allowance.json', 'r') as file:
+        appdir = Path(__file__).parents[1]
+        appdir = Path(__file__).parent
+        fname = os.path.join(appdir, 'data', 'nabers_star_allowance.json')
+        fname = os.path.join(appdir, 'data', 'nabers_star_allowance.json')
+        with open(fname, 'r') as file:
             data = json.load(file)
         data = data[self.state]
 
@@ -111,6 +125,9 @@ class StarCalculator():
         self.energyIntensity = energy / self.ratedArea
 
     def calc_stars(self):
+
+        if self.emissions == 0:
+            return
 
         # calculate eNorm for rated hours
         df = self.df.copy()
@@ -146,6 +163,7 @@ class StarCalculator():
         sdict[4.5] = (sdict[4] + sdict[5]) / 2
         sdict[5.5] = (sdict[5] + sdict[6]) / 2
         self.limits = dict(sorted(sdict.items()))
+
 
 if __name__ == '__main__':
 
