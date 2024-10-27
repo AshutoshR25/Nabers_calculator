@@ -1,0 +1,64 @@
+{
+    "Victoria": [
+        {
+            "ratedArea": 1000,
+            "ratedHours": 40,
+            "emissions": 151211.1,
+            "stars": 2
+        },
+        {
+            "ratedArea": 1000,
+            "ratedHours": 50,
+            "emissions": 173782.2,
+            "stars": 2
+        },
+        {
+            "ratedArea": 1000,
+            "ratedHours": 40,
+            "emissions": 115563.1,
+            "stars": 3
+        },
+        {
+            "ratedArea": 1000,
+            "ratedHours": 50,
+            "emissions": 133826.7,
+            "stars": 3
+        },
+        {
+            "ratedArea": 1000,
+            "ratedHours": 40,
+            "emissions": 79915.1,
+            "stars": 4
+        },
+        {
+            "ratedArea": 1000,
+            "ratedHours": 50,
+            "emissions": 93871.3,
+            "stars": 4
+        },
+        {
+            "ratedArea": 1000,
+            "ratedHours": 40,
+            "emissions": 44267.1,
+            "stars": 5
+        },
+        {
+            "ratedArea": 1000,
+            "ratedHours": 50,
+            "emissions": 53915.8,
+            "stars": 5
+        },
+        {
+            "ratedArea": 1000,
+            "ratedHours": 40,
+            "emissions": 22133.8,
+            "stars": 6
+        },
+        {
+            "ratedArea": 1000,
+            "ratedHours": 50,
+            "emissions": 26958.2,
+            "stars": 6
+        }
+    ]
+}

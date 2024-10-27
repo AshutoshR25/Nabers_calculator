@@ -4,6 +4,11 @@
             "NSW": 0.81,
             "Victoria": 0.98,
             "Tasmania": 0.17
+        },
+        "2024": {
+            "NSW": 0.66,
+            "Victoria": 0.77,
+            "Tasmania": 0.15
         }
     },
     "elec_scope3": {
@@ -11,6 +16,11 @@
             "NSW": 0.09,
             "Victoria": 0.11,
             "Tasmania": 0.02
+        },
+        "2024": {
+            "NSW": 0.04,
+            "Victoria": 0.09,
+            "Tasmania": 0.03
         }
     },
     "gas_scope1": {
@@ -18,10 +28,20 @@
             "NSW": 0.05153,
             "Victoria": 0.05153,
             "Tasmania": 0.05153
+        },
+        "2024": {
+            "NSW": 0.05153,
+            "Victoria": 0.05153,
+            "Tasmania": 0.05153
         }
     },
     "diesel_scope1": {
         "2020": {
+            "NSW": 0.0702,
+            "Victoria": 0.0702,
+            "Tasmania": 0.0702
+        },
+        "2024": {
             "NSW": 0.0702,
             "Victoria": 0.0702,
             "Tasmania": 0.0702
