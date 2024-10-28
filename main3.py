@@ -16,8 +16,8 @@ def main():
     # o = StarCalculator(ratedArea=100, ratedHours=50, elec=200000, year='2023')
     # o = StarCalculator(ratedArea=10000, ratedHours=50, elec=200000, year='2023')
     # o = StarCalculator(ratedArea=2708, ratedHours=50, elec=210000, year='2024')
-    o = StarCalculator(ratedArea=5084.3, ratedHours=50, elec=377021, year='2024')
-
+    #o = StarCalculator(ratedArea=5084.3, ratedHours=50, elec=377021, year='2024')
+    o = StarCalculator(ratedArea=2000, ratedHours=48, elec=202000, year='2024')
 
 class StarCalculator():
 
