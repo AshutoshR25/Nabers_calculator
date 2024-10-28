@@ -18,15 +18,15 @@ def main():
     # StarCalculator(ratedArea=2708, ratedHours=50, elec=210000, year='2024')
     # StarCalculator(ratedArea=5084.3, ratedHours=50, year='2020')
     # StarCalculator(ratedArea=5084.3, ratedHours=50, year='2024')
-    # StarCalculator(ratedArea=1000, ratedHours=50, year='2020')
+    StarCalculator(ratedArea=1000, ratedHours=40, year='2024')
 
     # StarCalculator(ratedArea=3000, ratedHours=54, elec=200000, year='2024')
-    StarCalculator(ratedArea=5084.3, ratedHours=50, year='2020')
+    # StarCalculator(ratedArea=5084.3, ratedHours=50, year='2020')
 
 
 class StarCalculator():
 
-    def __init__(self, **kwargs):
+    def __init__(self, show_limits=False, **kwargs):
         self.stars = None
         self.starsClip = None
         self.set_params(**kwargs)
@@ -40,7 +40,8 @@ class StarCalculator():
         self.calc_limits()
         self.show_settings()
         self.show_results()
-        self.show_limits()
+        if show_limits:
+            self.show_limits()
 
     def set_params(self, year='2024', state='Victoria', ratedArea=2000, ratedHours=50, **kwargs):
         self.year = year
@@ -77,16 +78,10 @@ class StarCalculator():
     def show_limits(self):
         log.info('star limits')
         factor_elec = self.factor_elec_scope2 + self.factor_elec_scope3
-        # factor_elec = self.factor_elec_scope2
-        print(factor_elec)
         df = pd.Series(self.limits).to_frame()
         df.columns = ['kgCO2-e']
         df['kWh'] = df['kgCO2-e'] / factor_elec
         df = df.astype(int)
-        print(df)
-        # for s, e in self.limits.items():
-        #     ekWh = e * (self.factor_elec_scope2 + self.factor_elec_scope2)
-        #     log.info('   {:4} {:8.0f} {:8.0f}'.format(s, e, eKwh))
 
     def check_year(self):
         self.yearNGA = self.year
