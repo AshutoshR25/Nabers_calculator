@@ -13,10 +13,15 @@ log = logging.getLogger()
 
 def main():
 
-    # o = StarCalculator(ratedArea=100, ratedHours=50, elec=200000, year='2023')
-    # o = StarCalculator(ratedArea=10000, ratedHours=50, elec=200000, year='2023')
-    # o = StarCalculator(ratedArea=2708, ratedHours=50, elec=210000, year='2024')
-    o = StarCalculator(ratedArea=5084.3, ratedHours=50, elec=377021, year='2024')
+    # StarCalculator(ratedArea=100, ratedHours=50, elec=200000, year='2023')
+    # StarCalculator(ratedArea=10000, ratedHours=50, elec=200000, year='2023')
+    # StarCalculator(ratedArea=2708, ratedHours=50, elec=210000, year='2024')
+    # StarCalculator(ratedArea=5084.3, ratedHours=50, year='2020')
+    # StarCalculator(ratedArea=5084.3, ratedHours=50, year='2024')
+    # StarCalculator(ratedArea=1000, ratedHours=50, year='2020')
+
+    # StarCalculator(ratedArea=3000, ratedHours=54, elec=200000, year='2024')
+    StarCalculator(ratedArea=5084.3, ratedHours=50, year='2020')
 
 
 class StarCalculator():
@@ -35,6 +40,7 @@ class StarCalculator():
         self.calc_limits()
         self.show_settings()
         self.show_results()
+        self.show_limits()
 
     def set_params(self, year='2024', state='Victoria', ratedArea=2000, ratedHours=50, **kwargs):
         self.year = year
@@ -62,14 +68,25 @@ class StarCalculator():
         log.info('factor_diesel_scope1 {:}'.format(self.factor_diesel_scope1))
 
     def show_results(self):
-        log.info('star limits')
-        for s, e in self.limits.items():
-            log.info('   {:4} {:8.0f}'.format(s, e))
-        log.info('energy intensity {:.1f} MJ/m2'.format(self.energyIntensity))
-        log.info('total emissions {:.0f} kgCO2-e'.format(self.emissions))
         if self.stars:
+            log.info('energy intensity {:.1f} MJ/m2'.format(self.energyIntensity))
+            log.info('total emissions {:.0f} kgCO2-e'.format(self.emissions))
             log.info('stars {:.2f}'.format(self.stars))
             log.info('stars clipped {:.1f}'.format(self.starsClip))
+
+    def show_limits(self):
+        log.info('star limits')
+        factor_elec = self.factor_elec_scope2 + self.factor_elec_scope3
+        # factor_elec = self.factor_elec_scope2
+        print(factor_elec)
+        df = pd.Series(self.limits).to_frame()
+        df.columns = ['kgCO2-e']
+        df['kWh'] = df['kgCO2-e'] / factor_elec
+        df = df.astype(int)
+        print(df)
+        # for s, e in self.limits.items():
+        #     ekWh = e * (self.factor_elec_scope2 + self.factor_elec_scope2)
+        #     log.info('   {:4} {:8.0f} {:8.0f}'.format(s, e, eKwh))
 
     def check_year(self):
         self.yearNGA = self.year
