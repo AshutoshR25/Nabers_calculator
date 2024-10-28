@@ -3,61 +3,61 @@
         {
             "ratedArea": 1000,
             "ratedHours": 40,
-            "emissions": 151211.1,
+            "emissions": 119303,
             "stars": 2
         },
         {
             "ratedArea": 1000,
             "ratedHours": 50,
-            "emissions": 173782.2,
+            "emissions": 137112,
             "stars": 2
         },
         {
             "ratedArea": 1000,
             "ratedHours": 40,
-            "emissions": 115563.1,
+            "emissions": 91178,
             "stars": 3
         },
         {
             "ratedArea": 1000,
             "ratedHours": 50,
-            "emissions": 133826.7,
+            "emissions": 105587,
             "stars": 3
         },
         {
             "ratedArea": 1000,
             "ratedHours": 40,
-            "emissions": 79915.1,
+            "emissions": 63051,
             "stars": 4
         },
         {
             "ratedArea": 1000,
             "ratedHours": 50,
-            "emissions": 93871.3,
+            "emissions": 74063,
             "stars": 4
         },
         {
             "ratedArea": 1000,
             "ratedHours": 40,
-            "emissions": 44267.1,
+            "emissions": 34926,
             "stars": 5
         },
         {
             "ratedArea": 1000,
             "ratedHours": 50,
-            "emissions": 53915.8,
+            "emissions": 42539,
             "stars": 5
         },
         {
             "ratedArea": 1000,
             "ratedHours": 40,
-            "emissions": 22133.8,
+            "emissions": 17463,
             "stars": 6
         },
         {
             "ratedArea": 1000,
             "ratedHours": 50,
-            "emissions": 26958.2,
+            "emissions": 21269,
             "stars": 6
         }
     ]
